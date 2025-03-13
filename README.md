@@ -1,4 +1,4 @@
-![img](./src/public/img/chatgpt.png)
+![img](./src/public/img/chatgpt-open-ai.jpg)
 
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
