@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"prompt\": \"me mostre um exemplo de api em laravel\"\r\n}",
+					"raw": "{\r\n    \"prompt\": \"me mostre um exemplo de api feita no em laravel\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
