@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "ce21d9af-2a52-4f7e-9476-6fcc9fa088e2",
+		"name": "ChatGpt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15952256",
+		"_collection_link": "https://diones32.postman.co/workspace/6db78dad-ecc5-419b-926f-36f6909bb4c5/collection/15952256-ce21d9af-2a52-4f7e-9476-6fcc9fa088e2?action=share&source=collection_link&creator=15952256"
+	},
+	"item": [
+		{
+			"name": "New Prompt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prompt\": \"me mostre um exemplo de api em laravel\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/chat/ask",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chat",
+						"ask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
