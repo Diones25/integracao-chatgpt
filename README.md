@@ -6,7 +6,7 @@
 
 ## Description
 
-[API ChatGPT](https://platform.openai.com/docs/overview) Este projeto faz integração com a APi do ChatGPT, com isso é possível enviar um prompt para a API e receber uma resposta direta do chatGPT, para funcionar a requisição coloque sua 'OPENAI_API_KEY' no arquivo .env.
+[API ChatGPT](https://platform.openai.com/docs/overview) Este projeto faz integração com a APi do ChatGPT, com isso é possível enviar um prompt para a API e receber uma resposta direta do chatGPT, para funcionar a requisição coloque sua 'OPENAI_API_KEY' no arquivo .env, também é preciso ter crédito no site do ChatGPT para a requisição funcionar.
 
 ## Project setup
 
