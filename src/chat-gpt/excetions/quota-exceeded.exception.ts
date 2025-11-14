@@ -1,4 +1,3 @@
-// src/common/exceptions/quota-exceeded.exception.ts
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class QuotaExceededException extends HttpException {
