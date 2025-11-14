@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { max } from 'rxjs';
+import { QuotaExceededException } from './excetions/quota-exceeded.exception';
 
 @Injectable()
 export class ChatGptService {
@@ -29,7 +30,7 @@ export class ChatGptService {
       return response.data.choices[0].message.content.trim();
     } catch (error) {
       console.error('Error calling OpenAI API:', error.response?.data || error.message);
-      throw new BadRequestException('Failed to generate response from ChatGPT');
+      throw new QuotaExceededException('Você excedeu sua cota atual. Verifique seu plano e detalhes de faturamento.');
     }
   }
 }
