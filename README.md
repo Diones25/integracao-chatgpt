@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="./src/public/img/chatgpt-open-ai.jpg" alt="Integração ChatGPT" width="800"/>
+  <img src="./src/public/img/chatgpt-open-ai.jpg" alt="ChatGPT Integration" width="800"/>
   <br/>
   <br/>
 
-  # 🤖 Integração com API do ChatGPT
+  # 🤖 ChatGPT API Integration
 
-  **API REST construída com NestJS para integrar com o modelo GPT-4o-mini da OpenAI**
+  **REST API built with NestJS to integrate with OpenAI's GPT-4o-mini model**
 
   <p>
     <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS"/>
@@ -24,44 +24,44 @@
 
 ---
 
-## 📋 Índice
+## 📋 Table of Contents
 
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Arquitetura](#-arquitetura)
-- [Stack Tecnológica](#-stack-tecnológica)
-- [Pré-requisitos](#-pré-requisitos)
-- [Instalação e Execução](#-instalação-e-execução)
+- [About](#-about)
+- [Architecture](#-architecture)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation & Setup](#-installation--setup)
 - [API](#-api)
 - [Screenshots](#-screenshots)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Scripts Disponíveis](#-scripts-disponíveis)
-- [Variáveis de Ambiente](#-variáveis-de-ambiente)
-- [Testes](#-testes)
-- [Licença](#-licença)
+- [Project Structure](#-project-structure)
+- [Available Scripts](#-available-scripts)
+- [Environment Variables](#-environment-variables)
+- [Tests](#-tests)
+- [License](#-license)
 
 ---
 
-## 💡 Sobre o Projeto
+## 💡 About
 
-Este projeto é uma **API REST** desenvolvida com **NestJS** que atua como um proxy entre o cliente e a **API de Chat Completions da OpenAI**. Ela expõe um endpoint que aceita um prompt textual, encaminha a requisição para o modelo **GPT-4o-mini** e retorna a resposta gerada pela inteligência artificial.
+This project is a **REST API** built with **NestJS** that acts as a proxy between the client and the **OpenAI Chat Completions API**. It exposes an endpoint that accepts a text prompt, forwards the request to the **GPT-4o-mini** model, and returns the AI-generated response.
 
-### Funcionalidades
+### Features
 
-- ✅ Envio de prompts para o ChatGPT (GPT-4o-mini)
-- ✅ Validação de requisições com `class-validator`
-- ✅ Documentação interativa via **Swagger** (`/api`)
-- ✅ Tratamento de erros e limites de cota (HTTP 429)
-- ✅ Configuração via variáveis de ambiente
+- ✅ Send prompts to ChatGPT (GPT-4o-mini)
+- ✅ Request validation with `class-validator`
+- ✅ Interactive API documentation via **Swagger** (`/api`)
+- ✅ Error handling and quota limit management (HTTP 429)
+- ✅ Environment variable configuration
 
 ---
 
-## 🏗 Arquitetura
+## 🏗 Architecture
 
-O projeto segue a **arquitetura modular do NestJS**, organizada por funcionalidades:
+The project follows **NestJS's modular architecture**, organized by feature:
 
 ```
                         ┌─────────────────────────────────────┐
-                        │           Cliente HTTP              │
+                        │          HTTP Client                │
                         │     (Postman / Frontend / curl)     │
                         └──────────────┬──────────────────────┘
                                        │
@@ -69,17 +69,17 @@ O projeto segue a **arquitetura modular do NestJS**, organizada por funcionalida
                                        │ { "prompt": "..." }
                                        ▼
                         ┌─────────────────────────────────────┐
-                        │         AppModule (Raiz)             │
+                        │          AppModule (Root)            │
                         │  ┌───────────────────────────────┐  │
                         │  │     ChatGptModule             │  │
                         │  │  ┌─────────────────────────┐  │  │
                         │  │  │   ChatGptController     │  │  │
-                        │  │  │   (validação & rota)    │  │  │
+                        │  │  │  (validation & routing) │  │  │
                         │  │  └──────────┬──────────────┘  │  │
                         │  │             │                  │  │
                         │  │  ┌──────────▼──────────────┐  │  │
                         │  │  │    ChatGptService       │  │  │
-                        │  │  │   (lógica de negócio)   │  │  │
+                        │  │  │   (business logic)      │  │  │
                         │  │  └──────────┬──────────────┘  │  │
                         │  └─────────────┼─────────────────┘  │
                         └────────────────┼────────────────────┘
@@ -89,68 +89,68 @@ O projeto segue a **arquitetura modular do NestJS**, organizada por funcionalida
                         ┌─────────────────────────────────────┐
                         │     OpenAI API (api.openai.com)     │
                         │  POST /v1/chat/completions          │
-                        │  Modelo: gpt-4o-mini                │
+                        │  Model: gpt-4o-mini                 │
                         └─────────────────────────────────────┘
 ```
 
-### Fluxo da Requisição
+### Request Flow
 
-1. O cliente envia um `POST /chat/ask` com `{ "prompt": "mensagem" }`
-2. O **ValidationPipe** global valida os campos da requisição
-3. O **ChatGptController** recebe a requisição e chama o serviço
-4. O **ChatGptService** monta o payload e faz uma requisição HTTP para a OpenAI
-5. A resposta da OpenAI é extraída e retornada ao cliente no formato `{ "response": "texto" }`
-6. Em caso de erro (cota excedida, chave inválida, etc.), retorna **HTTP 429**
-
----
-
-## 🛠 Stack Tecnológica
-
-| Categoria        | Tecnologia                                                    |
-| ---------------- | ------------------------------------------------------------- |
-| **Runtime**      | [Node.js](https://nodejs.org/) >= 18                          |
-| **Linguagem**    | [TypeScript](https://www.typescriptlang.org/) ^5.7.3          |
-| **Framework**    | [NestJS](https://nestjs.com/) ^11.0.1                         |
-| **HTTP Client**  | [Axios](https://axios-http.com/) ^1.16.0                      |
-| **Validação**    | [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer) |
-| **API Docs**     | [@nestjs/swagger](https://docs.nestjs.com/openapi/introduction) ^11.0.6 (Swagger) |
-| **Config**       | [@nestjs/config](https://docs.nestjs.com/techniques/configuration) ^4.0.1 |
-| **Testes**       | [Jest](https://jestjs.io/) + [Supertest](https://github.com/ladjs/supertest) |
-| **Lint/Format**  | [ESLint](https://eslint.org/) ^9 + [Prettier](https://prettier.io/) ^3.4 |
-| **Compilador**   | [SWC](https://swc.rs/) (compilação rápida)                   |
+1. The client sends a `POST /chat/ask` with `{ "prompt": "message" }`
+2. The global **ValidationPipe** validates the request fields
+3. The **ChatGptController** receives the request and calls the service
+4. The **ChatGptService** builds the payload and makes an HTTP request to OpenAI
+5. OpenAI's response is extracted and returned to the client as `{ "response": "text" }`
+6. On error (quota exceeded, invalid key, etc.), it returns **HTTP 429**
 
 ---
 
-## ✅ Pré-requisitos
+## 🛠 Tech Stack
+
+| Category        | Technology                                                      |
+| --------------- | --------------------------------------------------------------- |
+| **Runtime**     | [Node.js](https://nodejs.org/) >= 18                            |
+| **Language**    | [TypeScript](https://www.typescriptlang.org/) ^5.7.3            |
+| **Framework**   | [NestJS](https://nestjs.com/) ^11.0.1                           |
+| **HTTP Client** | [Axios](https://axios-http.com/) ^1.16.0                        |
+| **Validation**  | [class-validator](https://github.com/typestack/class-validator) + [class-transformer](https://github.com/typestack/class-transformer) |
+| **API Docs**    | [@nestjs/swagger](https://docs.nestjs.com/openapi/introduction) ^11.0.6 (Swagger) |
+| **Config**      | [@nestjs/config](https://docs.nestjs.com/techniques/configuration) ^4.0.1 |
+| **Testing**     | [Jest](https://jestjs.io/) + [Supertest](https://github.com/ladjs/supertest) |
+| **Lint/Format** | [ESLint](https://eslint.org/) ^9 + [Prettier](https://prettier.io/) ^3.4 |
+| **Compiler**    | [SWC](https://swc.rs/) (fast compilation)                      |
+
+---
+
+## ✅ Prerequisites
 
 - **Node.js** >= 18
 - **npm** >= 9
-- Uma **chave de API da OpenAI** com créditos disponíveis ([obter chave](https://platform.openai.com/api-keys))
+- An **OpenAI API key** with available credits ([get a key](https://platform.openai.com/api-keys))
 
 ---
 
-## 🚀 Instalação e Execução
+## 🚀 Installation & Setup
 
 ```bash
-# 1. Clone o repositório
-$ git clone <seu-repo>
+# 1. Clone the repository
+$ git clone <your-repo>
 
-# 2. Instale as dependências
+# 2. Install dependencies
 $ npm install
 
-# 3. Configure a chave da OpenAI
+# 3. Configure the OpenAI key
 $ cp .env.example .env
-# Edite o arquivo .env e adicione sua OPENAI_API_KEY
+# Edit the .env file and add your OPENAI_API_KEY
 
-# 4. Execute em desenvolvimento (com hot-reload)
+# 4. Run in development mode (with hot-reload)
 $ npm run dev
 
-# 5. Acesse a API
+# 5. Access the API
 #    Endpoint: http://localhost:3000/chat/ask
 #    Swagger:  http://localhost:3000/api
 ```
 
-A aplicação estará disponível na porta definida em `PORT` (padrão: `3000`).
+The application will be available on the port set in `PORT` (default: `3000`).
 
 ---
 
@@ -158,13 +158,13 @@ A aplicação estará disponível na porta definida em `PORT` (padrão: `3000`).
 
 ### `POST /chat/ask`
 
-Envia um prompt para o ChatGPT e retorna a resposta gerada.
+Sends a prompt to ChatGPT and returns the generated response.
 
 #### Request
 
 ```json
 {
-  "prompt": "Qual a capital da Alemanha?"
+  "prompt": "What is the capital of Germany?"
 }
 ```
 
@@ -172,7 +172,7 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 
 ```json
 {
-  "response": "A capital da Alemanha é Berlim"
+  "response": "The capital of Germany is Berlin"
 }
 ```
 
@@ -180,7 +180,7 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 
 ```json
 {
-  "message": "Você excedeu sua cota atual. Verifique seu plano e detalhes de faturamento.",
+  "message": "You exceeded your current quota. Check your plan and billing details.",
   "error": "Too Many Requests",
   "statusCode": 429
 }
@@ -196,28 +196,28 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 }
 ```
 
-> A documentação interativa completa está disponível no **Swagger** em [`/api`](http://localhost:3000/api) quando a aplicação estiver em execução.
+> Full interactive documentation is available on **Swagger** at [`/api`](http://localhost:3000/api) when the application is running.
 
 ---
 
 ## 📸 Screenshots
 
-> *Espaço reservado para capturas de tela das principais telas/ferramentas do projeto.*
+> *Space reserved for screenshots of the main project screens/tools.*
 
-### Swagger UI — Documentação Interativa
+### Swagger UI — Interactive Documentation
 
 <div align="center">
   <img src="./src/assets/doc/swagger.png" alt="Swagger UI" width="700"/>
   <br/>
-  <em>Interface do Swagger exibindo o endpoint POST /chat/ask com opção de "Try it out".</em>
+  <em>Swagger interface showing the POST /chat/ask endpoint with the "Try it out" option.</em>
 </div>
 
-### Teste no Swagger — Requisição e Resposta
+### Testing in Swagger — Request and Response
 
 <div align="center">
   <img src="./src/assets/doc/req_res.png" alt="Swagger Try It Out" width="700"/>
   <br/>
-  <em>Exemplo de requisição enviada pelo Swagger com prompt e resposta recebida do ChatGPT.</em>
+  <em>Example request sent via Swagger with a prompt and the response received from ChatGPT.</em>
 </div>
 
 ### Postman — Collection
@@ -225,95 +225,95 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 <div align="center">
   <img src="./src/assets/doc/postman.png" alt="Postman Request" width="700"/>
   <br/>
-  <em>Requisição sendo feita pelo Postman utilizando a collection disponível em <code>Postman/</code>.</em>
+  <em>Request made through Postman using the collection available in <code>Postman/</code>.</em>
 </div>
 
-> 💡 **Dica:** Coloque suas imagens na pasta `src/public/img/screenshots/` e atualize os caminhos acima conforme necessário. Para criar essa pasta, execute:
+> 💡 **Tip:** Place your images in the `src/assets/doc/` folder and update the paths above as needed. To create this folder, run:
 > ```bash
-> $ mkdir -p src/public/img/screenshots
+> $ mkdir -p src/assets/doc
 > ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 integracao-chatgpt/
-├── .env.example                 # Exemplo de variáveis de ambiente
+├── .env.example                 # Environment variable example
 ├── .gitignore
-├── .prettierrc                  # Configuração do Prettier
-├── eslint.config.mjs            # Configuração do ESLint (flat config)
-├── nest-cli.json                # Configuração do NestJS CLI
+├── .prettierrc                  # Prettier configuration
+├── eslint.config.mjs            # ESLint configuration (flat config)
+├── nest-cli.json                # NestJS CLI configuration
 ├── package.json
-├── tsconfig.json                # Configuração do TypeScript
-├── tsconfig.build.json          # Configuração de build
+├── tsconfig.json                # TypeScript configuration
+├── tsconfig.build.json          # Build configuration
 ├── Postman/
-│   └── ChatGpt.postman_collection.json   # Collection do Postman
+│   └── ChatGpt.postman_collection.json   # Postman collection
 ├── src/
-│   ├── main.ts                  # Bootstrap da aplicação
-│   ├── app.module.ts            # Módulo raiz
-│   ├── chat-gpt/                # Módulo de integração com ChatGPT
-│   │   ├── chat-gpt.module.ts   # Definição do módulo
-│   │   ├── chat-gpt.controller.ts  # Endpoints REST
-│   │   ├── chat-gpt.service.ts     # Lógica de negócio
+│   ├── main.ts                  # Application bootstrap
+│   ├── app.module.ts            # Root module
+│   ├── chat-gpt/                # ChatGPT integration module
+│   │   ├── chat-gpt.module.ts   # Module definition
+│   │   ├── chat-gpt.controller.ts  # REST endpoints
+│   │   ├── chat-gpt.service.ts     # Business logic
 │   │   ├── dtos/
-│   │   │   └── prompt-chat-gtp.dto.ts  # DTO de validação
+│   │   │   └── prompt-chat-gtp.dto.ts  # Validation DTO
 │   │   └── excetions/
-│   │       └── quota-exceeded.exception.ts  # Exceção de cota
+│   │       └── quota-exceeded.exception.ts  # Quota exception
 │   └── public/
 │       └── img/
-│           ├── chatgpt-open-ai.jpg    # Banner do projeto
-│           └── screenshots/           # Screenshots das telas
+│           ├── chatgpt-open-ai.jpg    # Project banner
+│           └── screenshots/           # App screenshots
 └── test/
-    ├── app.e2e-spec.ts          # Teste end-to-end
-    └── jest-e2e.json            # Configuração dos testes E2E
+    ├── app.e2e-spec.ts          # End-to-end test
+    └── jest-e2e.json            # E2E test configuration
 ```
 
 ---
 
-## 📜 Scripts Disponíveis
+## 📜 Available Scripts
 
-| Comando             | Descrição                                        |
-| ------------------- | ------------------------------------------------ |
-| `npm run build`     | Compila TypeScript para `dist/`                  |
-| `npm run start`     | Executa em modo de desenvolvimento               |
-| `npm run dev`       | Executa com hot-reload (recomendado para dev)    |
-| `npm run start:prod`| Executa a build de produção                      |
-| `npm run lint`      | Verifica e corrige problemas de lint             |
-| `npm run format`    | Formata o código com Prettier                    |
-| `npm test`          | Executa testes unitários                         |
-| `npm run test:watch`| Executa testes em modo observação                |
-| `npm run test:cov`  | Executa testes com cobertura                     |
-| `npm run test:e2e`  | Executa testes end-to-end                        |
-
----
-
-## 🔐 Variáveis de Ambiente
-
-| Variável          | Obrigatório | Padrão  | Descrição                          |
-| ----------------- | :---------: | ------- | ---------------------------------- |
-| `OPENAI_API_KEY`  |     ✅      | —       | Chave de API da OpenAI             |
-| `PORT`            |     ❌      | `3000`  | Porta onde o servidor será iniciado |
-
-> Crie um arquivo `.env` na raiz do projeto baseado no `.env.example` para configurar as variáveis.
+| Command              | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `npm run build`      | Compile TypeScript to `dist/`                     |
+| `npm run start`      | Run in development mode                           |
+| `npm run dev`        | Run with hot-reload (recommended for development) |
+| `npm run start:prod` | Run the production build                          |
+| `npm run lint`       | Check and fix lint issues                         |
+| `npm run format`     | Format code with Prettier                         |
+| `npm test`           | Run unit tests                                    |
+| `npm run test:watch` | Run tests in watch mode                           |
+| `npm run test:cov`   | Run tests with coverage                           |
+| `npm run test:e2e`   | Run end-to-end tests                              |
 
 ---
 
-## 🧪 Testes
+## 🔐 Environment Variables
+
+| Variable          | Required | Default | Description                     |
+| ----------------- | :------: | ------- | ------------------------------- |
+| `OPENAI_API_KEY`  |    ✅    | —       | OpenAI API key                  |
+| `PORT`            |    ❌    | `3000`  | Port the server will listen on  |
+
+> Create a `.env` file in the project root based on `.env.example` to configure the variables.
+
+---
+
+## 🧪 Tests
 
 ```bash
-# Testes unitários
+# Unit tests
 $ npm test
 
-# Testes end-to-end
+# End-to-end tests
 $ npm run test:e2e
 
-# Cobertura de testes
+# Test coverage
 $ npm run test:cov
 ```
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto é de uso privado — **UNLICENSED**.
+This project is private — **UNLICENSED**.
