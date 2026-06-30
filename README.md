@@ -207,7 +207,7 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 ### Swagger UI — Documentação Interativa
 
 <div align="center">
-  <img src="./src/public/img/screenshots/swagger-ui.png" alt="Swagger UI" width="700"/>
+  <img src="./src/assets/doc/swagger.png" alt="Swagger UI" width="700"/>
   <br/>
   <em>Interface do Swagger exibindo o endpoint POST /chat/ask com opção de "Try it out".</em>
 </div>
@@ -215,7 +215,7 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 ### Teste no Swagger — Requisição e Resposta
 
 <div align="center">
-  <img src="./src/public/img/screenshots/swagger-try-it-out.png" alt="Swagger Try It Out" width="700"/>
+  <img src="./src/assets/doc/req_res.png" alt="Swagger Try It Out" width="700"/>
   <br/>
   <em>Exemplo de requisição enviada pelo Swagger com prompt e resposta recebida do ChatGPT.</em>
 </div>
@@ -223,17 +223,9 @@ Envia um prompt para o ChatGPT e retorna a resposta gerada.
 ### Postman — Collection
 
 <div align="center">
-  <img src="./src/public/img/screenshots/postman-request.png" alt="Postman Request" width="700"/>
+  <img src="./src/assets/doc/postman.png" alt="Postman Request" width="700"/>
   <br/>
   <em>Requisição sendo feita pelo Postman utilizando a collection disponível em <code>Postman/</code>.</em>
-</div>
-
-### Terminal — Servidor em Execução
-
-<div align="center">
-  <img src="./src/public/img/screenshots/terminal-server.png" alt="Terminal" width="700"/>
-  <br/>
-  <em>Servidor NestJS rodando em modo de desenvolvimento com hot-reload.</em>
 </div>
 
 > 💡 **Dica:** Coloque suas imagens na pasta `src/public/img/screenshots/` e atualize os caminhos acima conforme necessário. Para criar essa pasta, execute:
